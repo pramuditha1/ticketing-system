@@ -1,28 +1,28 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # This indicates that you are defining a Deployment resource
 metadata:
   name: auth-depl
 spec:
-  replicas: 1
+  replicas: 1 # one replica(POD) of your application to be running
   selector:
     matchLabels:
-      app: auth
+      app: auth # This specifies that pods with the label "app: auth" will be managed by this Deployment.
   template:
     metadata:
       labels:
         app: auth
     spec:
       containers:
-        - name: auth
-          image: ticketing/auth
+        - name: auth # This sets the name of the container.
+          image: ticketing/auth # This specifies the Docker image to be used for the container.
 ---
 apiVersion: v1
-kind: Service
-metadata:
+kind: Service # This indicates that you are defining a Service resource, which provides network access to a set of pods.
+metadata: # This section contains metadata about the Service, including its name.
   name: auth-srv
 spec:
   selector:
-    app: auth
+    app: auth # It selects pods that have the label "app: auth," which matches the label defined in the Deployment's selector.
   ports:
     - name: auth
       protocol: TCP

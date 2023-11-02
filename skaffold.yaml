@@ -3,16 +3,16 @@ kind: Config
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s/*
+      - ./infra/k8s/* # The ./infra/k8s/* pattern is used to specify all YAML files within the "infra/k8s" directory.
 build:
   local:
-    push: false
+    push: false # local is specified with push: false, which means that the built images will not be pushed to a container registry.
   artifacts:
     - image: ticketing/auth
       context: auth
       docker:
-        dockerfile: Dockerfile
+        dockerfile: Dockerfile # This field specifies the name of the Dockerfile to use for building the Docker image.
       sync:
         manual:
-          - src: 'src/**/*.ts'
-            dest: .
+          - src: 'src/**/*.ts' # This specifies a pattern for source files to sync. It's indicating that any TypeScript files in the "src" directory or its subdirectories should be synchronized.
+            dest: . # This indicates that the synchronized files should be copied to the root of the build context, which is the "auth" directory in this case.

@@ -1,12 +1,12 @@
 import express from "express";
-import { json } from "body-parser"
 
-const app = express()
-const port = 3000
-app.use(json)
+const app = express();
+const port = 3000;
+
+app.use(express.json()); // Use built-in JSON middleware
 
 app.get('/api/users/getCurrentUser', (req, res) => {
-    res.send("its working!!!")
-})
+    res.send("It's working!!!");
+});
 
-app.listen(port, () => console.log(`listening on port ${port}!!!!!!`))
+app.listen(port, () => console.log(`Listening on port ${port}!`));
