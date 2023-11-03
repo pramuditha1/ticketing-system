@@ -4,6 +4,8 @@ import { signInRouter } from "./routes/signin";
 import { signOutRouter } from "./routes/signout";
 import { signUpRouter } from "./routes/signup";
 
+import { erorHandler } from "./middlewares/error-handler";
+
 const app = express();
 const port = 3000;
 
@@ -13,5 +15,7 @@ app.use(currentUserRouter),
 app.use(signInRouter),
 app.use(signOutRouter),
 app.use(signUpRouter),
+
+app.use(erorHandler);
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
