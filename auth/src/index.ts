@@ -5,6 +5,7 @@ import { signOutRouter } from "./routes/signout";
 import { signUpRouter } from "./routes/signup";
 
 import { erorHandler } from "./middlewares/error-handler";
+import { NotFoundError } from "./errors/not-found-error";
 
 const app = express();
 const port = 3000;
@@ -15,6 +16,10 @@ app.use(currentUserRouter),
 app.use(signInRouter),
 app.use(signOutRouter),
 app.use(signUpRouter),
+
+app.all('*', () => {
+    throw new NotFoundError
+})
 
 app.use(erorHandler);
 
